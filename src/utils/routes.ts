@@ -1,5 +1,5 @@
 export const basePath = import.meta.env.BASE_URL ?? "/";
-export const siteUrl = "https://drewsebastians.github.io/web-hitung-praktis";
+export const siteUrl = "https://web-hitung-praktis.pages.dev";
 
 export function normalizePath(path: string): string {
   const clean = path || "/";
@@ -26,3 +26,4 @@ export function withBase(path: string): string {
 export function canonicalUrl(path: string): string {
   return `${siteUrl}${normalizePath(path)}`;
 }
+

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://drewsebastians.github.io/web-hitung-praktis/sitemap.xml
+Sitemap: https://web-hitung-praktis.pages.dev/sitemap.xml
+

@@ -1,6 +1,6 @@
 # HitungPraktis
 
-Kalkulator sederhana untuk rumah, belanja, dan usaha kecil. Website ini dibuat sebagai static site React + Vite + TypeScript sehingga cocok untuk GitHub Pages atau static hosting lain.
+Kalkulator sederhana untuk rumah, belanja, dan usaha kecil. Website ini dibuat sebagai static site React + Vite + TypeScript dan saat ini ditargetkan untuk Cloudflare Pages.
 
 ## Isi Website
 
@@ -33,29 +33,22 @@ pnpm test
 pnpm build
 ```
 
-Build menghasilkan folder `dist/`. Script build juga menyalin `index.html` ke `404.html` agar routing SPA tetap bekerja di GitHub Pages.
+Build menghasilkan folder `dist/`. Script build juga menyalin `index.html` ke setiap route bersih agar URL seperti `/rumah/kalkulator-biaya-listrik/` bisa dilayani sebagai halaman statis.
 
-## Deploy ke GitHub Pages
+## Deploy ke Cloudflare Pages
 
-Workflow GitHub Actions sudah tersedia di `.github/workflows/deploy.yml`.
+Repo ini siap dipakai di Cloudflare Pages dengan pengaturan berikut:
 
-1. Buka repo di GitHub.
-2. Masuk ke Settings > Pages.
-3. Pilih Source: GitHub Actions.
-4. Push ke branch `main`.
-5. Workflow akan menjalankan `pnpm install`, test, build dengan `GITHUB_PAGES=true`, lalu menerbitkan folder `dist`.
+- Framework preset: Vite
+- Build command: `pnpm build`
+- Build output directory: `dist`
+- Root directory: `/`
+- Node version: `24`
+- Package manager: `pnpm@11.7.0`
 
-Untuk build manual dengan base path GitHub Pages:
+File `wrangler.toml` juga menyatakan output Pages di `dist`. Setiap push ke branch `main` akan memicu deployment Cloudflare Pages jika repo sudah terhubung di dashboard Cloudflare.
 
-```bash
-GITHUB_PAGES=true pnpm build
-```
-
-Di PowerShell:
-
-```powershell
-$env:GITHUB_PAGES="true"; pnpm build
-```
+Domain default yang dipakai untuk canonical URL dan sitemap adalah `https://web-hitung-praktis.pages.dev/`. Jika memakai custom domain, update `src/utils/routes.ts`, `public/robots.txt`, dan `public/sitemap.xml`.
 
 ## Cara Menambah Kalkulator Baru
 
@@ -84,3 +77,5 @@ Nilai tarif atau asumsi yang bisa berubah diberi `lastUpdated`. Verifikasi ulang
 - Cek tampilan mobile, tablet, dan desktop.
 - Pastikan nilai tarif/asumsi sudah sesuai sumber terbaru.
 - Pastikan halaman Tentang, Kontak, Privacy Policy, dan Disclaimer tidak kosong.
+
+
