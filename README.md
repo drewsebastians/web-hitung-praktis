@@ -35,18 +35,18 @@ pnpm build
 
 Build menghasilkan folder `dist/`. Script build juga menyalin `index.html` ke setiap route bersih agar URL seperti `/rumah/kalkulator-biaya-listrik/` bisa dilayani sebagai halaman statis.
 
-## Deploy ke Cloudflare Pages
+## Deploy ke Cloudflare
 
-Repo ini siap dipakai di Cloudflare Pages dengan pengaturan berikut:
+Repo ini siap dipakai di Cloudflare dengan Git integration / Workers Builds. Pengaturan build yang diperlukan:
 
 - Framework preset: Vite
 - Build command: `pnpm build`
-- Build output directory: `dist`
+- Static assets directory: `dist`
 - Root directory: `/`
 - Node version: `24`
 - Package manager: `pnpm@11.7.0`
 
-File `wrangler.toml` juga menyatakan output Pages di `dist`. Setiap push ke branch `main` akan memicu deployment Cloudflare Pages jika repo sudah terhubung di dashboard Cloudflare.
+File `wrangler.toml` mengatur Cloudflare Static Assets dari folder `dist` melalui blok `[assets]`. Setiap push ke branch `main` akan memicu deployment Cloudflare jika repo sudah terhubung di dashboard Cloudflare.
 
 Domain default yang dipakai untuk canonical URL dan sitemap adalah `https://web-hitung-praktis.pages.dev/`. Jika memakai custom domain, update `src/utils/routes.ts`, `public/robots.txt`, dan `public/sitemap.xml`.
 
